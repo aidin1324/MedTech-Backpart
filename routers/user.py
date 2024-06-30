@@ -13,14 +13,6 @@ def get_user_service(db: Session = Depends(get_db)):
     return UserCrud(db=db)
 
 
-@router.post("/registration", response_model=User)
-def create_user(
-    user: UserCreate,
-    user_service: UserCrud = Depends(get_user_service),
-):
-    db_user = user_service.create_user(user)
-    return db_user
-
 
 @router.get("/", response_model=list[User])
 def read_users(
@@ -38,6 +30,24 @@ def read_user(
     user_service: UserCrud = Depends(get_user_service)
 ):
     db_user = user_service.get_user_by_id(user_id)
+    return db_user
+
+
+@router.post("/registration", response_model=User)
+def create_user(
+    user: UserCreate,
+    user_service: UserCrud = Depends(get_user_service),
+):
+    db_user = user_service.create_user(user)
+    return db_user
+
+
+@router.post("/registration-admin", response_model=User)
+def create_super_user(
+    user: UserCreate,
+    user_service: UserCrud = Depends(get_user_service),
+):
+    db_user = user_service.create_super_user(user)
     return db_user
 
 

@@ -6,17 +6,11 @@ from typing import Optional
 
 
 class AppointmentBase(BaseModel):
-    start_time: datetime
-    end_time: datetime
+    pass
 
 
 class AppointmentCreate(AppointmentBase):
     pass
-
-
-class AppointmentUpdate(AppointmentBase):
-    start_time: Optional[datetime] = None
-    end_time: Optional[datetime] = None
 
 
 class Appointment(BaseModel):

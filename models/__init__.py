@@ -1,5 +1,5 @@
 from .doctor import *
 from .user import *
-from .doctordayschedule import *
+from .dtimeslot import *
 from .appointment import *
 

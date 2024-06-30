@@ -11,6 +11,11 @@ from oauth2 import oauth2
 router = APIRouter(tags=['Authentication'])
 
 
+@router.post('/test_admin')
+def test_admin(current_user: str = Depends(oauth2.get_current_super_user)):
+    return current_user
+
+
 @router.post('/user', response_model=schemas.Token)
 def login(user_credentials: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.email == user_credentials.username).first()

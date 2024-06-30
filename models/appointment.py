@@ -9,8 +9,6 @@ class Appointment(Base):
     id = Column(Integer, primary_key=True, index=True)
     patient_id = Column(Integer, ForeignKey("users.id"))
     time_slot_id = Column(Integer, ForeignKey("doctor_time_slots.id"))
-    start_time = Column(DateTime)
-    end_time = Column(DateTime)
 
     patient = relationship("User", back_populates="appointments")
-    day_schedule = relationship("DoctorDaySchedule", back_populates="appointments")
+    day_schedule = relationship("DtimeSlot", back_populates="appointments")

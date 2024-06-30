@@ -23,7 +23,7 @@ class UserUpdate(UserBase):
 
 class User(UserBase):
     id: int
-    is_superuser: bool = False
+    is_super_user: bool = False
     appointments: list[Appointment] = []
 
     class Config:

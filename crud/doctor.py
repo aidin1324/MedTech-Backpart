@@ -36,6 +36,7 @@ class DoctorCrud(BaseCrud):
             db_doctor = Doctor(
                 email=doctor.email,
                 name=doctor.name,
+                specialization=doctor.specialization,
                 password_hash=hashed_password,
                 phone=doctor.phone
             )

@@ -92,6 +92,8 @@ class UserCrud(BaseCrud):
 
     def delete_user(self, user_id: int):
         db_user = self.get_user_by_id(user_id)
+        if db_user is None:
+            raise HTTPException(status_code=404, detail="User not found")
         self._db.delete(db_user)
         self._db.commit()
         return {"detail": "User deleted"}

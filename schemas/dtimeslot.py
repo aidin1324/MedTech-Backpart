@@ -5,25 +5,25 @@ from .appointment import Appointment
 from datetime import datetime
 
 
-class DoctorDayScheduleBase(BaseModel):
+class DtimeSlotBase(BaseModel):
     start_time: datetime
     end_time: datetime
-    is_available: Optional[bool] = True
-    is_lunch_break: Optional[bool] = True
+    is_available: bool = True
+    is_lunch_break: bool = True
 
 
-class DoctorDayScheduleCreate(DoctorDayScheduleBase):
+class DtimeSlotCreate(DtimeSlotBase):
     pass
 
 
-class DoctorDayScheduleUpdate(DoctorDayScheduleBase):
+class DtimeSlotUpdate(DtimeSlotBase):
     start_time: Optional[datetime] = None
     end_time: Optional[datetime] = None
     is_available: Optional[bool] = None
     is_lunch_break: Optional[bool] = None
 
 
-class DoctorDaySchedule(DoctorDayScheduleBase):
+class DtimeSlot(DtimeSlotBase):
     id: int
     doctor_id: int
     appointments: list[Appointment] = []

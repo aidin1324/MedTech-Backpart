@@ -2,7 +2,7 @@ from pydantic import BaseModel, EmailStr
 from datetime import datetime
 from typing import Optional
 
-from .doctordayschedule import DoctorDaySchedule
+from .dtimeslot import DtimeSlot
 
 
 class DoctorBase(BaseModel):
@@ -27,7 +27,7 @@ class Doctor(DoctorBase):
     id: int
     license_number: str = "TEST123"
     license_expiry_date: datetime = datetime(2055, 6, 6)
-    time_slots: list[DoctorDaySchedule] = []
+    time_slots: list[DtimeSlot] = []
 
     class Config:
         orm_mode = True

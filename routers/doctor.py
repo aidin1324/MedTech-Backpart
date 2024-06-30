@@ -5,21 +5,13 @@ from schemas import Doctor, DoctorCreate, DoctorUpdate
 from database import get_db
 
 from crud import DoctorCrud
+from oauth2 import oauth2
 
 router = APIRouter(tags=["Doctors"])
 
 
 def get_doctor_service(db: Session = Depends(get_db)):
     return DoctorCrud(db=db)
-
-
-@router.post("/registration", response_model=Doctor)
-def create_doctor(
-    doctor: DoctorCreate,
-    doctor_service: DoctorCrud = Depends(get_doctor_service),
-):
-    db_doctor = doctor_service.create_doctor(doctor)
-    return db_doctor
 
 
 @router.get("/", response_model=list[Doctor])
@@ -38,6 +30,16 @@ def read_doctor(
     doctor_service: DoctorCrud = Depends(get_doctor_service)
 ):
     db_doctor = doctor_service.get_doctor_by_id(doctor_id)
+    return db_doctor
+
+
+@router.post("/registration", response_model=Doctor)
+def create_doctor(
+    doctor: DoctorCreate,
+    doctor_service: DoctorCrud = Depends(get_doctor_service),
+    token: str = Depends(oauth2.get_current_super_user)
+):
+    db_doctor = doctor_service.create_doctor(doctor)
     return db_doctor
 
 

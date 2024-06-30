@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from database import Base
 
 
-class DoctorDaySchedule(Base):
+class DtimeSlot(Base):
     __tablename__ = "doctor_time_slots"
 
     id = Column(Integer, primary_key=True, index=True)

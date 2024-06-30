@@ -13,4 +13,4 @@ class Appointment(Base):
     end_time = Column(DateTime)
 
     patient = relationship("User", back_populates="appointments")
-    day_schedule = relationship("DoctorTimeSlot", back_populates="appointments")
+    day_schedule = relationship("DoctorDaySchedule", back_populates="appointments")

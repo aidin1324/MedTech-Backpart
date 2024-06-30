@@ -3,7 +3,6 @@ from fastapi import FastAPI
 import models
 from database.database import engine
 from routers import auth, user
-
 models.Base.metadata.create_all(engine)
 
 app = FastAPI()

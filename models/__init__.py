@@ -1,4 +1,5 @@
-from .user import User
-from .doctor import Doctor
-from .doctordayschedule import DoctorDaySchedule
-from .appointment import Appointment, Base
+from .doctor import *
+from .user import *
+from .doctordayschedule import *
+from .appointment import *
+

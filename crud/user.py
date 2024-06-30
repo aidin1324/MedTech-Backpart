@@ -49,6 +49,30 @@ class UserCrud(BaseCrud):
             self._db.rollback()
             raise HTTPException(status_code=500, detail=str(e))
 
+    def create_super_user(self, user: schemas.UserCreate) -> User:
+        try:
+            db_user = self.get_user_by_email(user.email)
+            if db_user:
+                raise HTTPException(status_code=400, detail="User already exists")
+            hashed_password = self.pwd_context.hash(user.password)
+
+            db_user = User(
+                email=user.email,
+                name=user.name,
+                password_hash=hashed_password,
+                phone=user.phone,
+                is_super_user=True
+            )
+
+            self._db.add(db_user)
+            self._db.commit()
+            self._db.refresh(db_user)
+            return db_user
+
+        except Exception as e:
+            self._db.rollback()
+            raise HTTPException(status_code=500, detail=str(e))
+
     def update_user(self, user_id: int, user: schemas.UserUpdate) -> User:
         db_user = self.get_user_by_id(user_id)
         if db_user is None:

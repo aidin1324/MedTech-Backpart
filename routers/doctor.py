@@ -1,64 +1,62 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from schemas import User, UserCreate, UserUpdate
+from schemas import Doctor, DoctorCreate, DoctorUpdate
 from database import get_db
 
-from crud import UserCrud
+from crud import DoctorCrud
 
-router = APIRouter(tags=["User"])
-
-
-def get_user_service(db: Session = Depends(get_db)):
-    return UserCrud(db=db)
+router = APIRouter(tags=["Doctors"])
 
 
-@router.post("/registration", response_model=User)
-def create_user(
-    user: UserCreate,
-    user_service: UserCrud = Depends(get_user_service),
+def get_doctor_service(db: Session = Depends(get_db)):
+    return DoctorCrud(db=db)
+
+
+@router.post("/registration", response_model=Doctor)
+def create_doctor(
+    doctor: DoctorCreate,
+    doctor_service: DoctorCrud = Depends(get_doctor_service),
 ):
-    db_user = user_service.create_user(user)
-    return db_user
+    db_doctor = doctor_service.create_doctor(doctor)
+    return db_doctor
 
 
-@router.get("/", response_model=list[User])
-def read_users(
+@router.get("/", response_model=list[Doctor])
+def read_doctors(
     skip: int = 0,
     limit: int = 100,
-    user_service: UserCrud = Depends(get_user_service)
+    doctor_service: DoctorCrud = Depends(get_doctor_service)
 ):
-    db_users = user_service.get_users(skip=skip, limit=limit)
-    return db_users
+    db_doctors = doctor_service.get_doctors(skip=skip, limit=limit)
+    return db_doctors
 
 
-@router.get("/{user_id}", response_model=User)
-def read_user(
-    user_id: int,
-    user_service: UserCrud = Depends(get_user_service)
+@router.get("/{doctor_id}", response_model=Doctor)
+def read_doctor(
+    doctor_id: int,
+    doctor_service: DoctorCrud = Depends(get_doctor_service)
 ):
-    db_user = user_service.get_user_by_id(user_id)
-    return db_user
+    db_doctor = doctor_service.get_doctor_by_id(doctor_id)
+    return db_doctor
 
 
-@router.patch("/{user_id}", response_model=User)
-def update_user(
-    user_id: int,
-    user: UserUpdate,
-    user_service: UserCrud = Depends(get_user_service)
+@router.patch("/{doctor_id}", response_model=Doctor)
+def update_doctor(
+    doctor_id: int,
+    doctor: DoctorUpdate,
+    doctor_service: DoctorCrud = Depends(get_doctor_service)
 ):
-    db_user = user_service.update_user(user_id, user)
-    return db_user
+    db_doctor = doctor_service.update_doctor(doctor_id, doctor)
+    return db_doctor
 
 
-@router.delete("/{user_id}")
-def delete_user(
-    user_id: int,
-    user_service: UserCrud = Depends(get_user_service)
+@router.delete("/{doctor_id}")
+def delete_doctor(
+    doctor_id: int,
+    doctor_service: DoctorCrud = Depends(get_doctor_service)
 ):
-    db_user = user_service.delete_user(user_id)
-    return db_user
-
-
+    db_doctor = doctor_service.delete_doctor(doctor_id)
+    return db_doctor
 
 

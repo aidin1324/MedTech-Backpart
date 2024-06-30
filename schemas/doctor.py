@@ -4,6 +4,7 @@ from typing import Optional
 
 from .doctordayschedule import DoctorDaySchedule
 
+
 class DoctorBase(BaseModel):
     name: str
     specialization: str

@@ -5,3 +5,4 @@ from .token import Token, TokenData
 from .dtimeslot import DtimeSlotCreate, DtimeSlot, DtimeSlotUpdate
 from .utils import DayScheduleCreate
 from .appointment import Appointment, AppointmentCreate
+from .auth import LogtoSystem

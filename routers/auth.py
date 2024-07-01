@@ -22,8 +22,8 @@ def test_admin(current_user: str = Depends(oauth2.get_current_doctor)):
 
 
 @router.post('/user', response_model=schemas.Token)
-def login(user_credentials: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    user = db.query(models.User).filter(models.User.email == user_credentials.username).first()
+def login(user_credentials: schemas.LogtoSystem, db: Session = Depends(get_db)):
+    user = db.query(models.User).filter(models.User.email == user_credentials.email).first()
 
     if user is None:
         raise HTTPException(status.HTTP_403_FORBIDDEN, detail="Invalid Credentials")

@@ -5,13 +5,12 @@ from schemas import User, UserCreate, UserUpdate
 from database import get_db
 
 from crud import UserCrud
-
+from typing import Type
 router = APIRouter(tags=["User"])
 
 
 def get_user_service(db: Session = Depends(get_db)):
     return UserCrud(db=db)
-
 
 
 @router.get("/", response_model=list[User])

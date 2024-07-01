@@ -15,4 +15,4 @@ class Doctor(Base):
     license_number = Column(String, default="TEST123")
     license_expiry_date = Column(Date, default="06.06.2040")
 
-    time_slots = relationship("DtimeSlot", back_populates="doctor")
+    time_slots = relationship("DtimeSlot", back_populates="doctor", lazy="dynamic")

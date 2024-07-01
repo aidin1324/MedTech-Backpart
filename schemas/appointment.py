@@ -6,17 +6,16 @@ from typing import Optional
 
 
 class AppointmentBase(BaseModel):
-    pass
+    patient_id: int
+    time_slot_id: int
 
 
 class AppointmentCreate(AppointmentBase):
     pass
 
 
-class Appointment(BaseModel):
+class Appointment(AppointmentBase):
     id: int
-    patient_id: int
-    time_slot_id: int
 
     class Config:
         orm_mode = True

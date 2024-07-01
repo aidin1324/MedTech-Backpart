@@ -13,4 +13,4 @@ class User(Base):
     phone = Column(String)
     is_super_user = Column(Boolean, default=False)
 
-    appointments = relationship("Appointment", back_populates="patient")
+    appointments = relationship("Appointment", back_populates="patient", lazy="dynamic")

@@ -24,8 +24,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
 ACCESS_TOKEN_EXPIRE_MINUTES = float(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES"))
 
-oauth2_scheme_user = OAuth2PasswordBearer(tokenUrl="/login/user")
-oauth2_scheme_doctor = OAuth2PasswordBearer(tokenUrl="/login/doctor")
+oauth2_scheme_user = OAuth2PasswordBearer(tokenUrl="/login/user", scheme_name="user_oauth2_schema")
+oauth2_scheme_doctor = OAuth2PasswordBearer(tokenUrl="/login/doctor", scheme_name="doctor_oauth2_schema")
 
 
 def create_access_token(data: dict, expires_delta: timedelta = None):
@@ -75,7 +75,7 @@ def get_current_doctor(
     )
 ):
     token = verify_access_token(token, credentials_exception)
-    doctor = db.query(models.Doctor).filter(models.Doctor.id == token.id).first()
+    doctor = db.query(models.Doctor).filter(models.Doctor.id == token.user_id).first()
 
     return doctor
 

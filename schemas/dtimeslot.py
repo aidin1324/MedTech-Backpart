@@ -6,10 +6,11 @@ from datetime import datetime
 
 
 class DtimeSlotBase(BaseModel):
-    start_time: datetime
-    end_time: datetime
+    start_time: str
+    end_time: str
     is_available: bool = True
-    is_lunch_break: bool = True
+    is_lunch_break: bool = False
+    date: Optional[datetime] = datetime.now().date()
 
 
 class DtimeSlotCreate(DtimeSlotBase):

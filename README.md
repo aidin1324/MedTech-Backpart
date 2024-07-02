@@ -35,10 +35,10 @@ To run the project on your local machine, follow these steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repository
-   cd your-repository
+   git clone [https://github.com/your-repository](https://github.com/aidin1324/MedTech-Backpart.git)
+   cd [your-repository](https://github.com/aidin1324/MedTech-Backpart.git)
    poetry install
-   poetry run uvicorn main:app --reload```
+   poetry run uvicorn main:app --reload
 
 # fastapi provides automatic documentation 
 ## Swagger UI
